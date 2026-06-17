@@ -1,1 +1,160 @@
 
+fcn ui_repeat (cre_str value, cre_int count) -> str {
+    cre_str result = "";
+    cre_int i = 0;
+
+    while i < count {
+        result = result + value;
+        i = i + 1;
+    }
+
+    return result;
+}
+
+fcn ui_line () {
+    cons!("────────────────────────────────────────");
+}
+
+fcn ui_divider () {
+    cons!("────────────────────────────────────────");
+}
+
+fcn ui_space () {
+    cons!("");
+}
+
+fcn ui_title (cre_str text) {
+    ui_line();
+    cons!("◆ " + text);
+    ui_line();
+}
+
+fcn ui_subtitle (cre_str text) {
+    cons!("◇ " + text);
+    ui_divider();
+}
+
+fcn ui_text (cre_str text) {
+    cons!(text);
+}
+
+fcn ui_label (cre_str label, cre_str value) {
+    cons!(label + ": " + value);
+}
+
+fcn ui_number (cre_str label, cre_int value) {
+    cons!(label + ": " + value);
+}
+
+fcn ui_bool (cre_str label, cre_bool value) {
+    cons!(label + ": " + value);
+}
+
+fcn ui_success (cre_str text) {
+    cons!("[✓] " + text);
+}
+
+fcn ui_error (cre_str text) {
+    cons!("[x] " + text);
+}
+
+fcn ui_warning (cre_str text) {
+    cons!("[!] " + text);
+}
+
+fcn ui_info (cre_str text) {
+    cons!("[i] " + text);
+}
+
+fcn ui_step (cre_int number, cre_str text) {
+    cons!(number + ". " + text);
+}
+
+fcn ui_bullet (cre_str text) {
+    cons!("• " + text);
+}
+
+fcn ui_checkbox (cre_str text, cre_bool checked) {
+    if checked {
+        cons!("[x] " + text);
+    } else {
+        cons!("[ ] " + text);
+    }
+}
+
+fcn ui_progress (cre_int current, cre_int total) {
+    cre_int width = 20;
+    cre_int filled = current * width / total;
+    cre_int empty = width - filled;
+
+    cre_str bar = "[" + ui_repeat("#", filled) + ui_repeat("-", empty) + "]";
+
+    cons!(bar + " " + current + "/" + total);
+}
+
+fcn ui_box (cre_str text) {
+    cre_int width = len(text) + 4;
+
+    cons!("┌" + ui_repeat("─", width) + "┐");
+    cons!("│  " + text + "  │");
+    cons!("└" + ui_repeat("─", width) + "┘");
+}
+
+fcn ui_card (cre_str title, cre_str body) {
+    cre_int title_width = len(title) + 4;
+    cre_int body_width = len(body) + 4;
+
+    cre_int width = title_width;
+
+    if body_width > width {
+        width = body_width;
+    }
+
+    cons!("┌" + ui_repeat("─", width) + "┐");
+    cons!("│  " + title + ui_repeat(" ", width - len(title) - 2) + "│");
+    cons!("├" + ui_repeat("─", width) + "┤");
+    cons!("│  " + body + ui_repeat(" ", width - len(body) - 2) + "│");
+    cons!("└" + ui_repeat("─", width) + "┘");
+}
+
+fcn ui_user_card (cre_str name, cre_int age, cre_bool admin) {
+    ui_card("User", name);
+    ui_label("Name", name);
+    ui_number("Age", age);
+    ui_bool("Admin", admin);
+}
+
+fcn ui_list (cre_arr items) {
+    for (cre_str item in items) {
+        ui_bullet(item);
+    }
+}
+
+fcn ui_table_two (cre_arr labels, cre_arr values) {
+    cre_int i = 0;
+
+    while i < len(labels) {
+        cons!(labels[i] + " │ " + values[i]);
+        i = i + 1;
+    }
+}
+
+fcn ui_banner (cre_str text) {
+    ui_space();
+    cons!("████████████████████████████████████████");
+    cons!("█ " + text);
+    cons!("████████████████████████████████████████");
+    ui_space();
+}
+
+fcn ui_app_start (cre_str app_name) {
+    ui_banner(app_name);
+    ui_success("App started");
+    ui_space();
+}
+
+fcn ui_app_end () {
+    ui_space();
+    ui_success("Done");
+    ui_line();
+}
