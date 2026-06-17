@@ -1,1 +1,47 @@
+fcn q_repeat (cre_str value, cre_int count) -> str {
+    cre_str result = "";
+    cre_int i = 0;
 
+    while i < count {
+        result = result + value;
+        i = i + 1;
+    }
+
+    return result;
+}
+
+fcn q_line () -> str {
+    return "────────────────────────────────────────";
+}
+
+fcn q_dash_line () -> str {
+    return "----------------------------------------";
+}
+
+fcn q_surround (cre_str left, cre_str value, cre_str right) -> str {
+    return left + value + right;
+}
+
+fcn q_prefix (cre_str prefix, cre_str value) -> str {
+    return prefix + value;
+}
+
+fcn q_suffix (cre_str value, cre_str suffix) -> str {
+    return value + suffix;
+}
+
+fcn q_quote (cre_str value) -> str {
+    return "\"" + value + "\"";
+}
+
+fcn q_parens (cre_str value) -> str {
+    return "(" + value + ")";
+}
+
+fcn q_brackets (cre_str value) -> str {
+    return "[" + value + "]";
+}
+
+fcn q_braces (cre_str value) -> str {
+    return "{" + value + "}";
+}
