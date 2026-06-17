@@ -1,1 +1,76 @@
+fcn q_double (cre_int n) -> int {
+    return n + n;
+}
 
+fcn q_triple (cre_int n) -> int {
+    return n + n + n;
+}
+
+fcn q_square (cre_int n) -> int {
+    return n * n;
+}
+
+fcn q_cube (cre_int n) -> int {
+    return n * n * n;
+}
+
+fcn q_abs (cre_int n) -> int {
+    if n < 0 {
+        return 0 - n;
+    }
+
+    return n;
+}
+
+fcn q_min (cre_int a, cre_int b) -> int {
+    if a < b {
+        return a;
+    }
+
+    return b;
+}
+
+fcn q_max (cre_int a, cre_int b) -> int {
+    if a > b {
+        return a;
+    }
+
+    return b;
+}
+
+fcn q_clamp (cre_int value, cre_int min, cre_int max) -> int {
+    if value < min {
+        return min;
+    }
+
+    if value > max {
+        return max;
+    }
+
+    return value;
+}
+
+fcn q_is_even (cre_int n) -> bool {
+    cre_int half = n / 2;
+    return half * 2 == n;
+}
+
+fcn q_is_odd (cre_int n) -> bool {
+    if q_is_even(n) {
+        return false;
+    }
+
+    return true;
+}
+
+fcn q_between (cre_int value, cre_int min, cre_int max) -> bool {
+    if value < min {
+        return false;
+    }
+
+    if value > max {
+        return false;
+    }
+
+    return true;
+}
